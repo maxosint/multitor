@@ -89,8 +89,12 @@ function CreateTorProcess() {
        --RefuseUnknownExits 1 \
        --ClientOnly 1 \
        --StrictNodes 1 \
-       --ExcludeSingleHopRelays 1 \ 
-       --ExcludeNodes {ae},{au},{bh},{by},{ca},{cn},{cu},{eg},{et},{fr},{gb},{in},{ir},{jo},{kp},{kr},{kz},{lk},{ly},{my},{no},{nz},{pk},{ru},{sa},{sd},{sy},{th},{tj},{tm},{tn},{tr},{uk},{us},{uz},{ve},{vn},{ye} \
+       --ExcludeSingleHopRelays 1 \
+       # For further privacy, uncomment the option that best fits your threat model.
+       # --ExcludeNodes {au},{ca},{gb},{uk},{nz},{us} \ # Exclude Five Eyes countries
+       # --ExcludeNodes {au},{ca},{gb},{uk},{nz},{us},{dk},{nl},{fr},{no},{de},{be},{it},{es},{se} \ # Exclude Fourteen Eyes countries
+       # --ExcludeNodes {au},{ca},{gb},{uk},{nz},{us},{dk},{nl},{fr},{no},{de},{be},{it},{es},{se},{il},{jp},{kr},{sg} \ # Exclude Fourteen Eyes countries plus affiliate countries
+       # --ExcludeNodes {au},{ca},{gb},{uk},{nz},{us},{dk},{nl},{fr},{no},{de},{be},{it},{es},{se},{il},{jp},{kr},{sg},{ae},{cn},{ru}, \ # Exclude the big players  
        >>"$_log_stdout" 2>&1 ; _kstate="$?"
 
   if [[ $_kstate -eq 0 ]] ; then
