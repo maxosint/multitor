@@ -82,14 +82,19 @@ function CreateTorProcess() {
        --DataDirectory "${_proc_dir}" \
        --SocksBindAddress 127.0.0.1 \
        --NewCircuitPeriod 15 \
-       --MaxCircuitDirtiness 15 \
+       --MaxCircuitDirtiness 1800 \ 
        --NumEntryGuards 8 \
        --CircuitBuildTimeout 5 \
        --ExitRelay 0 \
-       --RefuseUnknownExits 0 \
+       --RefuseUnknownExits 1 \
        --ClientOnly 1 \
        --StrictNodes 1 \
-       --AllowSingleHopCircuits 1 \
+       --ExcludeSingleHopRelays 1 \
+       # For further privacy, uncomment the option that best fits your threat model.
+       # --ExcludeNodes {au},{ca},{gb},{uk},{nz},{us} \ # Exclude Five Eyes countries
+       # --ExcludeNodes {au},{ca},{gb},{uk},{nz},{us},{dk},{nl},{fr},{no},{de},{be},{it},{es},{se} \ # Exclude Fourteen Eyes countries
+       # --ExcludeNodes {au},{ca},{gb},{uk},{nz},{us},{dk},{nl},{fr},{no},{de},{be},{it},{es},{se},{il},{jp},{kr},{sg} \ # Exclude Fourteen Eyes countries plus affiliate countries
+       # --ExcludeNodes {au},{ca},{gb},{uk},{nz},{us},{dk},{nl},{fr},{no},{de},{be},{it},{es},{se},{il},{jp},{kr},{sg},{ae},{cn},{ru}, \ # Exclude the big players  
        >>"$_log_stdout" 2>&1 ; _kstate="$?"
 
   if [[ $_kstate -eq 0 ]] ; then
